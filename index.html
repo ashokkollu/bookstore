@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Bookstore</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#contactus">Contact Us </a></li>
+            <li></li>
+        </ul>
+        <input type="text" placeholder="Search books...." id="search-bar" style="height: 38px; width: auto;">
+        <button id="search-button">Search</button>
+    </nav>
+
+    <div class="home" id="home">
+
+        <div class="image-container">
+            <img src="images/welcome.png" alt="Welcome Image" class="overlay-image">
+            <div class="overlay-text">
+                <h3>Welcome</h3>
+            </div>
+        </div>
+        
+    
+
+    </div>
+    <div class="Collections" id="collections">
+       
+        <div id="books-section">
+
+        </div>
+    </div>
+
+    
+
+    <div id="search-result" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Search Result</h2>
+            <p id="search-result-message"></p>
+        </div>
+    </div>
+    <p>If you want to buy books or require information about purchasing, you can contact using the below contact details or you can write your queries in the message box.</p>
+    <footer id="contactus">
+        
+        <div class="footer-img">
+            <img src="images/footer.jpeg" alt="thank you visit again" width="400" height="300">
+        </div>
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>Email: contact@bookstore.com</p>
+            <p>Phone: +123 456 7890</p>
+            <p>Address: Building No. 456, Library Street</p>
+        </div>
+    
+        <div class="write-us">
+            <h3>Write Us</h3>
+            <form id="contact-form">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required style="height: 30px;">
+    
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" name="email" required style="height: 30px;">
+    
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" rows="4" required style="height: 150px;"></textarea>
+    
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </footer>
+    
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
