@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cards.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="navdiv">
+            <a href="index.html" class="navbtn">Home</a>
+            <div id="search-container">
+                <input type="text" id="SearchInput" placeholder="Search Book">
+                <button onclick="SearchBook()" class="navbtn"><i class="material-icons">search</i></button>
+            </div>
+            <a href="cart.html" class="navbtn">Cart (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <div id="result-container" class="card-container ">
+
+    </div>
+
+
+   
+    <script>
+        const queryParams = new URLSearchParams(window.location.search);
+        const query = queryParams.get('query');
+        const Url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=40&key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
+
+        fetch(Url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                console.log(response);
+                const container = document.getElementById('result-container');
+                container.innerHTML = '';
+
+                // Use map() to iterate over the response items and create HTML for each book
+                response.items?.map((book) => {
+                    const { title, authors, imageLinks } = book.volumeInfo;
+                    const bookId = book.id;
+                    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
+
+                    container.innerHTML += `
+                        <div class="card">
+                            <img src="${thumbnail}" alt="${title}">
+                            <div class="content">
+                                <h3>${title}</h3>
+                                <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
+                                <div class="buttons">
+                                    <button class="card-btn details-btn" onclick="viewDetails('${bookId}')">More details</button>
+                                    <button class="card-btn cart-btn" onclick="addToCart('${bookId}')">Add to cart</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            })
+            .catch((error) => {
+                alert("Invalid request or error occurred");
+            });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

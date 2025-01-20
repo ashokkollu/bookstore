@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <style>
+
+        .genre-cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            /* Responsive columns */
+            gap: 20px;
+            /* Spacing between grid items */
+            padding: 20px;
+        }
+
+        .genre-card {
+            aspect-ratio: 1 / 1;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .genre-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .genre-card h3 {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+
+        .genre-card:hover {
+            transform: scale(1.05);
+        }
+
+        #genres h2 {
+            background-color: #cd573d;
+            color: #f4f4f4;
+            padding: 1%;
+            
+            text-align: center;
+        }
+
+        
+
+        @media (max-width: 992px) {
+            .genre-cards {
+                grid-template-columns: repeat(4, 1fr);
+                /* Smaller columns for smaller screens */
+            }
+        }
+        @media (max-width: 768px) {
+            .genre-cards {
+                grid-template-columns: repeat(3, 1fr);
+                /* Smaller columns for smaller screens */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .genre-cards {
+                grid-template-columns: repeat(2, 1fr);
+                /* Smaller columns for smaller screens */
+            }
+        }
+    </style>
+
+
+
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="navdiv">
+            <a href="index.html" class="navbtn">Home</a>
+            <div id="search-container">
+                <input type="text" id="SearchInput" placeholder="Search Book">
+                <button onclick="SearchBook()" class="navbtn"><i class="material-icons">search</i></button>
+            </div>
+            <a href="cart.html" class="navbtn">Cart (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <section>
+        <img id="welcome-img" src="images/visitors-bookstore-with-people-choose-books_107791-7069.jpg" alt="" width="100%" height="auto">
+    </section>
+    <section id="genres">
+        <h2>Browse by Genre</h2>
+        <div id="genreCards" class="genre-cards">
+            <!-- Genre cards will be dynamically added here -->
+        </div>
+    </section>
+
+    <script>
+        const genres = ["Adventure", "Classic","Drama", "Fantasy","Fiction", "Mystery", "Poetry", "Romance", "Thriller", "Horror","History", "Science", "Biography", "Children"];
+
+        function loadGenreCards() {
+            const genreCardsContainer = document.getElementById("genreCards");
+            if (!genreCardsContainer) {
+                console.error("Container #genreCards not found");
+                return;
+            }
+
+            genres.forEach(genre => {
+                const card = document.createElement("div");
+                card.classList.add("genre-card");
+
+                const cardImage = document.createElement("img");
+                cardImage.src = `images/${genre.toLowerCase().replace(/\s+/g, '-')}.jpg`;
+                cardImage.alt = `${genre} Genre`;
+                card.appendChild(cardImage);
+
+                const cardText = document.createElement("h3");
+                cardText.textContent = genre;
+                card.appendChild(cardText);
+
+
+                card.onclick = () => window.location.href = `genre.html?genre=${encodeURIComponent(genre)}`;
+
+                genreCardsContainer.appendChild(card);
+            });
+        }
+
+        window.onload = loadGenreCards;
+
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

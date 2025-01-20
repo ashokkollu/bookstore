@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bookdetails.css">
+    <link rel="stylesheet" href="cards.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="navdiv">
+            <a href="index.html" class="navbtn">Home</a>
+            <div id="search-container">
+                <input type="text" id="SearchInput" placeholder="Search Book">
+                <button onclick="SearchBook()" class="navbtn"><i class="material-icons">search</i></button>
+            </div>
+            <a href="cart.html" class="navbtn">Cart (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+
+        <section>
+            <h1 id="bookTitle"></h1>
+            <div id="box">
+                <div id="imdiv">
+                    <img id="bookImage" src="" alt="">
+                </div>
+                <div id="bookDetails">
+                    <h3 id="bookAuthors"></h3>
+                    <p id="bookDescription"></p>
+                    <h5 id="bookPublisher"></h5>
+                    <p id="bookPageCount"></p>
+                    <p id="bookCategories"></p>
+                    <button class="card-btn cart-btn" onclick="addToCartFromDetails()">Add to cart</button>
+                </div>
+            </div>
+        </section>
+     
+
+    <script>
+        const queryParams = new URLSearchParams(window.location.search);
+        const bookId = queryParams.get('id');
+        const Url = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
+
+        fetch(Url)
+            .then(response => response.json())
+            .then(book => {
+                if (book.volumeInfo) {
+                    const { title, description, authors, publisher, imageLinks, pageCount, categories } = book.volumeInfo;
+                    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
+
+                    document.getElementById('bookTitle').innerText = title;
+                    document.getElementById('bookDescription').innerText = description || 'No description available.';
+                    document.getElementById('bookAuthors').innerText = `Authors: ${authors ? authors.join(', ') : 'Unknown'}`;
+                    document.getElementById('bookPublisher').innerText = `Publisher: ${publisher || 'Unknown'}`;
+                    document.getElementById('bookPageCount').innerText = `Page count: ${pageCount || 'N/A'}`;
+                    document.getElementById('bookCategories').innerText = `Categories: ${categories ? categories.join(', ') : 'Unknown'}`;
+                    document.getElementById('bookImage').src = thumbnail;
+                } else {
+                    document.getElementById('bookTitle').innerText = 'Book not found';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching book details:', error);
+                document.getElementById('bookTitle').innerText = 'Error fetching book details';
+            });
+
+
+            function addToCartFromDetails() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const bookId = queryParams.get('id'); // Get the book ID from the URL
+
+    if (!bookId) {
+        alert("Invalid book ID.");
+        return;
+    }
+
+    // Reuse the addToCart function
+    addToCart(bookId);
+}
+
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>

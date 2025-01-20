@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <style>
+
+    </style>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cards.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="navdiv">
+            <a href="index.html" class="navbtn">Home</a>
+            <div id="search-container">
+                <input type="text" id="SearchInput" placeholder="Search Book">
+                <button onclick="SearchBook()" class="navbtn"><i class="material-icons">search</i></button>
+            </div>
+            <a href="cart.html" class="navbtn">Cart (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Cart Container -->
+    <div id="cart-container" class="card-container"></div>
+
+    <!-- Buy All Button -->
+    <div style="display: flex;justify-content: center; text-align: center; margin-top: 20px;">
+        <button class="card-btn buy-all-btn" onclick="buyAll()">Buy All</button>
+    </div>
+
+    
+ <script>
+        // Function to load items in the cart
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const container = document.getElementById('cart-container');
+            container.innerHTML = '';
+    
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Your cart is empty.</p>';
+                return;
+            }
+    
+            cart.forEach((bookId) => {
+                const Url = `https://www.googleapis.com/books/v1/volumes/${bookId}?key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
+    
+                fetch(Url)
+                    .then(response => response.json())
+                    .then(book => {
+                        if (book.volumeInfo) {
+                            const { title, authors, imageLinks } = book.volumeInfo;
+                            const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150';
+    
+                            const card = document.createElement('div');
+                            card.classList.add('card');
+    
+                            card.innerHTML = `
+                                <img src="${thumbnail}" alt="${title}">
+                                <div class="content">
+                                    <h3>${title}</h3>
+                                    <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
+                                    <div class="buttons">
+                                        <button class="card-btn details-btn" onclick="viewDetails('${bookId}')">More details</button>
+                                        <button class="card-btn remove-btn" onclick="removeFromCart('${bookId}', '${title}')">Remove</button>
+                                        <button class="card-btn buy-btn" onclick="BuyFromCart('${bookId}', '${title}')">Buy</button>
+                                    </div>
+                                </div>
+                            `;
+    
+                            container.appendChild(card);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching book details:', error);
+                    });
+            });
+        }
+    
+        // Function to remove a book from the cart
+        function removeFromCart(bookId, title) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(id => id !== bookId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`"${title}" has been removed from your cart.`);
+    
+            // Reload cart items
+            loadCart();
+            updateCartCount();
+        }
+    
+        // Function to handle buying all items in the cart
+        function buyAll() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert("Your cart is empty. Add items to buy.");
+                return;
+            }
+    
+            let bookNames = [];
+            let fetchPromises = cart.map(bookId =>
+                fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+                    .then(response => response.json())
+                    .then(book => {
+                        if (book.volumeInfo && book.volumeInfo.title) {
+                            bookNames.push(book.volumeInfo.title);
+                        }
+                    })
+            );
+    
+            Promise.all(fetchPromises).then(() => {
+                const booksList = bookNames.join(", ");
+                const address = prompt(`Enter your address to purchase:\nBooks: ${booksList}`);
+                if (!address) {
+                    alert("Address is required to complete the purchase.");
+                    return;
+                }
+    
+                alert(`Purchase successful! Items purchased:\n${booksList}\nAddress: ${address}`);
+                localStorage.removeItem('cart');
+                loadCart();
+                updateCartCount();
+            });
+        }
+    
+        // Function to handle buying an individual book
+        function BuyFromCart(bookId, title) {
+            const address = prompt(`Enter your address to purchase:\nBook: "${title}"`);
+            if (!address) {
+                alert("Address is required to complete the purchase.");
+                return;
+            }
+    
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(id => id !== bookId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+    
+            alert(`Purchase successful for "${title}"\nAddress: ${address}`);
+            loadCart();
+            updateCartCount();
+        }
+    
+        // Function to update the cart count in the navbar
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+    
+        // Function to view details of a specific book
+        function viewDetails(bookId) {
+            window.location.href = `details.html?id=${bookId}`;
+        }
+    
+        // Load cart items and update cart count on page load
+        window.onload = () => {
+            loadCart();
+            updateCartCount();
+        };
+    </script>
+    
+
+    <script src="script.js"></script>
+</body>
+
+</html>

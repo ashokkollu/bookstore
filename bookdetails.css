@@ -1,0 +1,108 @@
+section {
+    margin: 1%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bookTitle {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+}
+
+#box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem; /* Space between image and text */
+    width: 100%;
+   
+    flex-wrap: wrap;
+    padding: 0 2%;
+}
+
+#imdiv {
+    flex: 1 1 40%; /* Take up 40% of the space */
+    min-width: 200px; /* Prevent the image from being too small on smaller screens */
+}
+
+img {
+    width: 100%; /* Ensure the image fills the container */
+    /* Maintain aspect ratio */
+   height: 80vh; /* Limit height to a fixed value */
+    border-radius: 8px; /* Optional: adds rounded corners to the image */
+}
+
+#bookDetails {
+    flex: 1 1 55%; /* Take up the remaining space */
+    min-width: 250px; /* Prevent the text from becoming too narrow */
+}
+
+h3, h5 {
+    margin: 0.5rem 0;
+}
+
+#bookDescription {
+    margin-top: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+#bookPublisher, #bookPageCount, #bookCategories {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+#bookCategories {
+    font-style: italic;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    #box {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: center;
+    }
+
+    #imdiv, #bookDetails {
+        flex: 1 1 100%; /* Make each section take full width */
+        margin-bottom: 2rem; /* Add spacing between stacked items */
+    }
+
+    img {
+        max-height: 250px; /* Adjust image size for smaller screens */
+    }
+
+    #bookTitle {
+        font-size: 1.5rem; /* Adjust title size for small screens */
+    }
+
+    #bookDescription {
+        font-size: 0.9rem; /* Adjust description font size */
+    }
+
+    #bookPublisher, #bookPageCount, #bookCategories {
+        font-size: 0.9rem; /* Adjust publisher and other text sizes */
+    }
+}
+
+@media (max-width: 480px) {
+    #bookTitle {
+        font-size: 1.2rem; /* Further adjust title size for very small screens */
+    }
+
+    #bookDescription {
+        font-size: 0.85rem; /* Further adjust description font size */
+    }
+
+    #bookPublisher, #bookPageCount, #bookCategories {
+        font-size: 0.85rem; /* Adjust publisher and other text sizes */
+    }
+}
