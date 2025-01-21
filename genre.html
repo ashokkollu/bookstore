@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+
 <body>
     <nav id="navbar">
         <div id="navdiv">
@@ -24,81 +26,54 @@
     </div>
 
     <script>
-       
-function loadBooksForGenre() {
-    const queryParams = new URLSearchParams(window.location.search);
-    const genre = queryParams.get('genre');  // Get the 'genre' parameter from the URL
-    
-    // Check if the genre parameter exists in the URL
-    if (!genre || genre.trim() === "") {
-        alert("Genre parameter is missing or empty in the URL");
-        return;  // Exit the function if there's no valid genre
-    }
 
-    const Url = `https://www.googleapis.com/books/v1/volumes?q=subject:${encodeURIComponent(genre)}&maxResults=40&key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
+        function loadBooksForGenre() {
+            const queryParams = new URLSearchParams(window.location.search);
+            const genre = queryParams.get('genre');  // Get the 'genre' parameter from the URL
 
-    console.log("Fetching data from URL:", Url);
-
-    fetch(Url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Failed to fetch data from the API");
-            }
-            return response.json();
-        })
-        .then((response) => {
-            console.log("API Response:", response); // Log the API response for debugging
-            
-            const container = document.getElementById('genre-container');
-            if (!response.items) {
-                container.innerHTML = "<p>No books found for this genre.</p>";
-                return;
+            // Check if the genre parameter exists in the URL
+            if (!genre || genre.trim() === "") {
+                alert("Genre parameter is missing or empty in the URL");
+                return;  // Exit the function if there's no valid genre
             }
 
-            response.items.forEach((book) => {
-    const { title, authors, imageLinks } = book.volumeInfo;
-    const bookId = book.id;
-    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
+            const Url = `https://www.googleapis.com/books/v1/volumes?q=subject:${encodeURIComponent(genre)}&maxResults=40&key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
 
-    const card = document.createElement('div');
-    card.classList.add('card');
+            console.log("Fetching data from URL:", Url);
 
-    // Create the image element
-    const img = document.createElement('img');
-    img.src = thumbnail;
-    img.alt = title; 
-    img.onclick = () => window.location.href = `details.html?id=${bookId}`;
+            fetch(Url)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch data from the API");
+                    }
+                    return response.json();
+                })
+                .then((response) => {
+                    console.log("API Response:", response); // Log the API response for debugging
 
-    // Create the content section
-    const content = document.createElement('div');
-    content.classList.add('content');
-    content.innerHTML = `
-        <h3>${title}</h3>
-        <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
-        <div class="buttons">
-            <button class="card-btn cart-btn" onclick="addToCart('${bookId}')">Add to cart</button>
-        </div>
-    `;
+                    const container = document.getElementById('genre-container');
+                    if (!response.items) {
+                        container.innerHTML = "<p>No books found for this genre.</p>";
+                        return;
+                    }
 
-    // Append the image and content to the card
-    card.appendChild(img);
-    card.appendChild(content);
+                    response.items.forEach((book) => {
+                        createBookCard(book, container);
+                    });
 
-    container.appendChild(card);
-});
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("An error occurred while fetching the books. Please try again later.");
+                });
+        }
 
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("An error occurred while fetching the books. Please try again later.");
-        });
-}
-
-// Call the function after the page loads
-window.onload = loadBooksForGenre;
+        // Call the function after the page loads
+        window.onload = loadBooksForGenre;
 
     </script>
-
+    <script src="book.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
