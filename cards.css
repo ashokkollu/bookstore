@@ -18,6 +18,13 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Book Image */
@@ -27,6 +34,7 @@
     max-height: 240px; /* Adjust this size as needed */
     object-fit: contain; /* Ensure the full image is visible */
     background-color: #ECF0F1;
+    cursor: pointer; /* Indicate the card is clickable */
 }
 
 /* Card Content */
@@ -50,13 +58,15 @@
 }
 
 /* Button Container */
+/* Button Container */
 .card .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
+    display: flex; /* Ensures buttons are aligned side by side */
+    gap: 8px; /* Adds space between buttons */
+    justify-content: center; /* Centers the buttons horizontally */
+    align-items: center; /* Aligns the buttons vertically */
     margin-bottom: 12px;
 }
+
 
 /* Buttons */
 .card-btn {
@@ -71,20 +81,13 @@
 
 /* Button hover effects */
 .buy-btn {
-    background-color: #02e16e;
+    background-color: #4a3369;
 }
 
 .buy-btn:hover {
-    background-color: #01b95a;
+    background-color: #402563;
 }
 
-.buy-all-btn {
-    background-color: #9ac3fa;
-}
-
-.buy-all-btn:hover {
-    background-color: #7fa9f0;
-}
 
 .remove-btn {
     background-color: #c34051;
@@ -93,13 +96,6 @@
 .remove-btn:hover {
     background-color: #c31f35;
 }
-.details-btn{
-    background-color:#4a3369;
-}
-
-.details-btn:hover {
-    background-color:#523f74;
-}
 
 .cart-btn{
     background-color: #6f1b4b;
@@ -107,6 +103,14 @@
 .cart-btn:hover{
     background-color: #850b50
 }
+.buy-all-btn {
+    background-color: #232f6c;
+}
+
+.buy-all-btn:hover {
+    background-color: #1b2665;
+}
+
 
 /* Responsive Design */
 @media (max-width: 1200px) {

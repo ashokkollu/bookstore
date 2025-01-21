@@ -42,31 +42,44 @@
                 const container = document.getElementById('result-container');
                 container.innerHTML = '';
 
-                // Use map() to iterate over the response items and create HTML for each book
-                response.items?.map((book) => {
-                    const { title, authors, imageLinks } = book.volumeInfo;
-                    const bookId = book.id;
-                    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
+                
+                response.items.forEach((book) => {
+    const { title, authors, imageLinks } = book.volumeInfo;
+    const bookId = book.id;
+    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
 
-                    container.innerHTML += `
-                        <div class="card">
-                            <img src="${thumbnail}" alt="${title}">
-                            <div class="content">
-                                <h3>${title}</h3>
-                                <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
-                                <div class="buttons">
-                                    <button class="card-btn details-btn" onclick="viewDetails('${bookId}')">More details</button>
-                                    <button class="card-btn cart-btn" onclick="addToCart('${bookId}')">Add to cart</button>
+    const card = document.createElement('div');
+    card.classList.add('card');
 
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-            })
-            .catch((error) => {
-                alert("Invalid request or error occurred");
-            });
+    // Create the image element
+    const img = document.createElement('img');
+    img.src = thumbnail;
+    img.alt = title;
+    img.onclick = () => window.location.href = `details.html?id=${bookId}`;
+
+    // Create the content section
+    const content = document.createElement('div');
+    content.classList.add('content');
+    content.innerHTML = `
+        <h3>${title}</h3>
+        <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
+        <div class="buttons">
+            <button class="card-btn cart-btn" onclick="addToCart('${bookId}')">Add to cart</button>
+        </div>
+    `;
+
+    // Append the image and content to the card
+    card.appendChild(img);
+    card.appendChild(content);
+
+    container.appendChild(card);
+});
+
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while fetching the books. Please try again later.");
+        });
     </script>
 
     <script src="script.js"></script>

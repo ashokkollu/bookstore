@@ -7,10 +7,6 @@ function SearchBook() {
   }
 }
 
-// view details of book
-function viewDetails(bookId) {
-  window.location.href = `details.html?id=${bookId}`;
-}
 
 function addToCart(bookId) {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
