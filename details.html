@@ -23,25 +23,23 @@
         </div>
     </nav>
 
-
-        <section>
-            <h1 id="bookTitle"></h1>
-            <div id="box">
-                <div id="imdiv">
-                    <img id="bookImage" src="" alt="">
-                </div>
-                <div id="bookDetails">
-                    <h3 id="bookAuthors"></h3>
-                    <p id="bookDescription"></p>
-                    <h5 id="bookPublisher"></h5>
-                    <p id="bookPageCount"></p>
-                    <p id="bookCategories"></p>
-                    <button class="card-btn cart-btn" onclick="addToCartFromDetails()">Add to cart</button>
-                </div>
+    <section>
+        <div id="box">
+            <div id="imdiv">
+                <img id="bookImage" src="" alt="">
+                <button class="details-card-btn card-btn cart-btn" onclick="addToCartFromDetails()">Add to cart</button> <!-- Button below the image -->
             </div>
-        </section>
-     
-
+            <div id="bookDetails">
+                <h1 id="bookTitle"></h1>
+                <h4 id="bookAuthors" class="details-texts"></h4>
+                <p id="bookDescription"></p>
+                <h4 id="bookPublisher" class="details-texts"></h4>
+                <p id="bookPageCount" class="details-texts"></p>
+                <p id="bookCategories" class="details-texts"></p>
+            </div>
+        </div>
+    </section>
+    
     <script>
         const queryParams = new URLSearchParams(window.location.search);
         const bookId = queryParams.get('id');
@@ -51,11 +49,12 @@
             .then(response => response.json())
             .then(book => {
                 if (book.volumeInfo) {
-                    const { title, description, authors, publisher, imageLinks, pageCount, categories } = book.volumeInfo;
+                    const { title, subtitle, description, authors, publisher, imageLinks, pageCount, categories } = book.volumeInfo;
                     const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
 
                     document.getElementById('bookTitle').innerText = title;
-                    document.getElementById('bookDescription').innerText = description || 'No description available.';
+                   
+                    document.getElementById('bookDescription').innerHTML = cleanDescription(description) || 'No description available.';
                     document.getElementById('bookAuthors').innerText = `Authors: ${authors ? authors.join(', ') : 'Unknown'}`;
                     document.getElementById('bookPublisher').innerText = `Publisher: ${publisher || 'Unknown'}`;
                     document.getElementById('bookPageCount').innerText = `Page count: ${pageCount || 'N/A'}`;
@@ -70,22 +69,25 @@
                 document.getElementById('bookTitle').innerText = 'Error fetching book details';
             });
 
+        function cleanDescription(description) {
+            return description.replace(/<\/?p>/g, '').trim();
+        }
 
-            function addToCartFromDetails() {
-    const queryParams = new URLSearchParams(window.location.search);
-    const bookId = queryParams.get('id'); // Get the book ID from the URL
+        function addToCartFromDetails() {
+            const queryParams = new URLSearchParams(window.location.search);
+            const bookId = queryParams.get('id'); // Get the book ID from the URL
 
-    if (!bookId) {
-        alert("Invalid book ID.");
-        return;
-    }
+            if (!bookId) {
+                alert("Invalid book ID.");
+                return;
+            }
 
-    // Reuse the addToCart function
-    addToCart(bookId);
-}
-
+            // Reuse the addToCart function
+            addToCart(bookId);
+        }
     </script>
     <script src="script.js"></script>
 </body>
+
 
 </html>

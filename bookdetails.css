@@ -1,108 +1,174 @@
+/* Book Details Section */
 section {
-    margin: 1%;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#bookTitle {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    
+    margin-top: 70px;  /* Push content down to avoid navbar overlap */
 }
 
 #box {
     display: flex;
-    flex-direction: row;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    gap: 30px;
+}
+
+/* Image Styling - 35% of parent */
+#imdiv {
+    flex: 0 0 35%;
+    display: flex;
+    flex-direction: column;  /* Stack the image and button vertically */
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px; /* Increased space between image and button */
+}
+
+#imdiv img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.details-card-btn {
+    width: 70%; /* Slightly increased button width for better alignment */
+    padding: 12px 20px;
+}
+
+/* Book Details */
+#bookDetails {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 2rem; /* Space between image and text */
-    width: 100%;
-   
-    flex-wrap: wrap;
-    padding: 0 2%;
+    gap: 25px; /* Increased gap for better readability */
+    padding-left: 20px;
 }
 
-#imdiv {
-    flex: 1 1 40%; /* Take up 40% of the space */
-    min-width: 200px; /* Prevent the image from being too small on smaller screens */
-}
-
-img {
-    width: 100%; /* Ensure the image fills the container */
-    /* Maintain aspect ratio */
-   height: 80vh; /* Limit height to a fixed value */
-    border-radius: 8px; /* Optional: adds rounded corners to the image */
-}
-
-#bookDetails {
-    flex: 1 1 55%; /* Take up the remaining space */
-    min-width: 250px; /* Prevent the text from becoming too narrow */
-}
-
-h3, h5 {
-    margin: 0.5rem 0;
+#bookTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: #000e29;
 }
 
 #bookDescription {
-    margin-top: 1rem;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
+    font-size: 16px;
+    color: #000000;
+    line-height: 1.8;
 }
 
-#bookPublisher, #bookPageCount, #bookCategories {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-}
+/* Responsive Design */
 
-#bookCategories {
-    font-style: italic;
-}
-
-/* Responsive Design for smaller screens */
-@media (max-width: 768px) {
+/* Large Screens (Desktops and Laptops) */
+@media (max-width: 1200px) {
     #box {
-        flex-direction: column; /* Stack items vertically on small screens */
+        max-width: 900px;
+        gap: 20px;
+        padding: 25px; /* Reduced padding for better space management */
+    }
+
+    #bookTitle {
+        font-size: 26px;
+    }
+}
+
+/* Medium Screens (Tablets and small laptops) */
+@media (max-width: 800px) {
+    #box {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 25px;  /* Adjusted gap between sections */
+    }
+
+    #imdiv {
+        flex: 1;
+        max-width: 60%;
+    }
+
+    #bookDetails {
+        text-align: center;
         align-items: center;
     }
 
-    #imdiv, #bookDetails {
-        flex: 1 1 100%; /* Make each section take full width */
-        margin-bottom: 2rem; /* Add spacing between stacked items */
-    }
-
-    img {
-        max-height: 250px; /* Adjust image size for smaller screens */
+    .details-card-btn {
+        width: 100%;
+        padding: 15px 20px;  /* Increased padding for the button */
     }
 
     #bookTitle {
-        font-size: 1.5rem; /* Adjust title size for small screens */
+        font-size: 24px;
     }
 
     #bookDescription {
-        font-size: 0.9rem; /* Adjust description font size */
-    }
-
-    #bookPublisher, #bookPageCount, #bookCategories {
-        font-size: 0.9rem; /* Adjust publisher and other text sizes */
+        font-size: 15px;
     }
 }
 
-@media (max-width: 480px) {
+/* Small Screens (Mobile Phones) */
+@media (max-width: 600px) {
+    #box {
+        padding: 15px;
+        max-width: 100%;
+        flex-direction: column;
+        gap: 30px;  /* Increased gap to separate content more */
+    }
+
+    #imdiv {
+        max-width: 90%;
+    }
+
     #bookTitle {
-        font-size: 1.2rem; /* Further adjust title size for very small screens */
+        font-size: 22px;
     }
 
     #bookDescription {
-        font-size: 0.85rem; /* Further adjust description font size */
+        font-size: 14px;
     }
 
-    #bookPublisher, #bookPageCount, #bookCategories {
-        font-size: 0.85rem; /* Adjust publisher and other text sizes */
+    .details-card-btn {
+        font-size: 16px;
+        padding: 12px 18px; /* Adjusted padding for consistency */
+    }
+
+    #SearchInput {
+        width: 150px;
+    }
+
+    .navbtn {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+}
+
+/* Extra Small Screens (Very small devices) */
+@media (max-width: 400px) {
+    #box {
+        padding: 10px;
+        gap: 20px; /* Reduced gap for very small screens */
+    }
+
+    #bookTitle {
+        font-size: 20px;
+    }
+
+    #bookDescription {
+        font-size: 12px;
+    }
+
+    .details-card-btn {
+        font-size: 14px;
+        padding: 10px 14px; /* Reduced padding for smaller screens */
+    }
+
+    #SearchInput {
+        width: 120px;
+    }
+
+    .navbtn {
+        font-size: 12px;
+        padding: 4px 8px;
     }
 }

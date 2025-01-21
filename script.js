@@ -7,6 +7,13 @@ function SearchBook() {
   }
 }
 
+ // Event listener for Enter key in the search input
+ document.getElementById('SearchInput').addEventListener('keydown', function(event) {
+  if (event.key === "Enter") {
+      SearchBook();
+  }
+});
+
 
 function addToCart(bookId) {
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
