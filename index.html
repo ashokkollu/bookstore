@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookstore</title>
     <style>
-
         .genre-cards {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -49,11 +48,11 @@
             background-color: #cd573d;
             color: #f4f4f4;
             padding: 1%;
-            
+
             text-align: center;
         }
 
-        
+
 
         @media (max-width: 992px) {
             .genre-cards {
@@ -61,6 +60,7 @@
                 /* Smaller columns for smaller screens */
             }
         }
+
         @media (max-width: 768px) {
             .genre-cards {
                 grid-template-columns: repeat(3, 1fr);
@@ -81,10 +81,12 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="loader.css">
 </head>
 
 <body>
-    <nav id="navbar">
+    <div class="loader"></div>
+    <nav id="navbar" class="hidecontent">
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -95,10 +97,11 @@
         </div>
     </nav>
 
-    <section>
-        <img id="welcome-img" src="images/visitors-bookstore-with-people-choose-books_107791-7069.jpg" alt="" width="100%" height="auto">
+    <section class="hidecontent">
+        <img id="welcome-img" src="images/visitors-bookstore-with-people-choose-books_107791-7069.jpg" alt=""
+            width="100%" height="auto">
     </section>
-    <section id="genres">
+    <section id="genres" class="hidecontent">
         <h2>Browse by Genre</h2>
         <div id="genreCards" class="genre-cards">
             <!-- Genre cards will be dynamically added here -->
@@ -106,7 +109,7 @@
     </section>
 
     <script>
-        const genres = ["Adventure", "Classic","Drama", "Fantasy","Fiction", "Mystery", "Poetry", "Romance", "Thriller", "Horror","History", "Science", "Biography", "Children"];
+        const genres = ["Adventure", "Classic", "Drama", "Fantasy", "Fiction", "Mystery", "Poetry", "Romance", "Thriller", "Horror", "History", "Science", "Biography", "Children"];
 
         function loadGenreCards() {
             const genreCardsContainer = document.getElementById("genreCards");
@@ -138,6 +141,36 @@
         window.onload = loadGenreCards;
 
     </script>
+    <script>
+
+        window.onload = function () {
+            loadGenreCards();
+
+
+            // Ensure loader stays for 3 seconds and show content after 3 seconds
+            setTimeout(function () {
+                // Hide the loader and show the content after 3 seconds
+                $(".loader").fadeOut("slow", function () {
+                    $(".hidecontent").fadeIn("slow");
+                });
+            }, 3000); // 3-second delay
+        };
+    </script>
+    <script>
+        window.onload = function () {
+            loadGenreCards();
+
+
+            // Ensure loader stays for 3 seconds and show content after 3 seconds
+            setTimeout(function () {
+                // Hide the loader and show the content after 3 seconds
+                $(".loader").fadeOut("slow", function () {
+                    $(".hidecontent").fadeIn("slow");
+                });
+            }, 3000); // 3-second delay
+        };
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="loader.css"> -->
 </head>
 
 <body>
-    <nav id="navbar">
+    <!-- <div class="loader"></div> -->
+    <nav id="navbar" class="hidecontent">
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -24,10 +26,10 @@
     </nav>
 
     <!-- Cart Container -->
-    <div id="cart-container" class="card-container"></div>
+    <div id="cart-container" class="card-container hidecontent"></div>
 
     <!-- Buy All Button -->
-    <div style="display: flex;justify-content: center; text-align: center; margin-top: 20px;">
+    <div style="display: flex;justify-content: center; text-align: center; margin-top: 20px;" class="hidecontent">
         <button class="card-btn buy-all-btn" onclick="buyAll()">Buy All</button>
     </div>
 
@@ -174,6 +176,7 @@
 
 
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 
 </html>

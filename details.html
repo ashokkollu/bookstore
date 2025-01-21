@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="bookdetails.css">
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="loader.css"> -->
 </head>
 
 <body>
-    <nav id="navbar">
+    <!-- <div class="loader"></div> -->
+    <nav id="navbar" class="hidecontent">
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -23,11 +25,12 @@
         </div>
     </nav>
 
-    <section>
+    <section class="hidecontent">
         <div id="box">
             <div id="imdiv">
                 <img id="bookImage" src="" alt="">
-                <button class="details-card-btn card-btn cart-btn" onclick="addToCartFromDetails()">Add to cart</button> <!-- Button below the image -->
+                <button class="details-card-btn card-btn cart-btn" onclick="addToCartFromDetails()">Add to cart</button>
+                <!-- Button below the image -->
             </div>
             <div id="bookDetails">
                 <h1 id="bookTitle"></h1>
@@ -39,7 +42,7 @@
             </div>
         </div>
     </section>
-    
+
     <script>
         const queryParams = new URLSearchParams(window.location.search);
         const bookId = queryParams.get('id');
@@ -53,7 +56,7 @@
                     const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
 
                     document.getElementById('bookTitle').innerText = title;
-                   
+
                     document.getElementById('bookDescription').innerHTML = cleanDescription(description) || 'No description available.';
                     document.getElementById('bookAuthors').innerText = `Authors: ${authors ? authors.join(', ') : 'Unknown'}`;
                     document.getElementById('bookPublisher').innerText = `Publisher: ${publisher || 'Unknown'}`;
@@ -87,6 +90,7 @@
         }
     </script>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 
 

@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- <link rel="stylesheet" href="loader.css"> -->
 </head>
 
 <body>
-    <nav id="navbar">
+    <!-- <div class="loader"></div> -->
+    <nav id="navbar" class="hidecontent">
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -21,7 +23,7 @@
             <a href="cart.html" class="navbtn">Cart (<span id="cartCount">0</span>)</a>
         </div>
     </nav>
-    <div id="genre-container" class="card-container ">
+    <div id="genre-container" class="card-container " hidecontent">
 
     </div>
 
@@ -72,6 +74,7 @@
         window.onload = loadBooksForGenre;
 
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="book.js"></script>
     <script src="script.js"></script>
 </body>

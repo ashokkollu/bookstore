@@ -36,3 +36,4 @@ function updateCartCount() {
 
 // Update cart count on page load
 updateCartCount();
+
