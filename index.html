@@ -81,12 +81,11 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="loader.css">
+   
 </head>
 
 <body>
-    <div class="loader"></div>
-    <nav id="navbar" class="hidecontent">
+    <nav id="navbar"  >
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -97,11 +96,11 @@
         </div>
     </nav>
 
-    <section class="hidecontent">
+    <section  >
         <img id="welcome-img" src="images/visitors-bookstore-with-people-choose-books_107791-7069.jpg" alt=""
             width="100%" height="auto">
     </section>
-    <section id="genres" class="hidecontent">
+    <section id="genres"  >
         <h2>Browse by Genre</h2>
         <div id="genreCards" class="genre-cards">
             <!-- Genre cards will be dynamically added here -->
@@ -141,37 +140,8 @@
         window.onload = loadGenreCards;
 
     </script>
-    <script>
 
-        window.onload = function () {
-            loadGenreCards();
-
-
-            // Ensure loader stays for 3 seconds and show content after 3 seconds
-            setTimeout(function () {
-                // Hide the loader and show the content after 3 seconds
-                $(".loader").fadeOut("slow", function () {
-                    $(".hidecontent").fadeIn("slow");
-                });
-            }, 3000); // 3-second delay
-        };
-    </script>
-    <script>
-        window.onload = function () {
-            loadGenreCards();
-
-
-            // Ensure loader stays for 3 seconds and show content after 3 seconds
-            setTimeout(function () {
-                // Hide the loader and show the content after 3 seconds
-                $(".loader").fadeOut("slow", function () {
-                    $(".hidecontent").fadeIn("slow");
-                });
-            }, 3000); // 3-second delay
-        };
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
