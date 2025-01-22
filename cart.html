@@ -9,12 +9,38 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-   
+
+    <style>
+        .remove-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.743);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .remove-popup-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            height: 200px
+        }
+    </style>
+
 </head>
 
 <body>
-   
-    <nav id="navbar"  >
+
+    <nav id="navbar">
         <div id="navdiv">
             <a href="index.html" class="navbtn">Home</a>
             <div id="search-container">
@@ -29,8 +55,14 @@
     <div id="cart-container" class="card-container hidecontent"></div>
 
     <!-- Buy All Button -->
-    <div style="display: flex;justify-content: center; text-align: center; margin-top: 20px;"  >
+    <div style="display: flex;justify-content: center; text-align: center; margin-top: 20px;">
         <button class="card-btn buy-all-btn" onclick="buyAll()">Buy All</button>
+    </div>
+
+    <div id="removePopup" class="remove-popup">
+        <div class="remove-popup-content">
+            <p id="remove-popup-message"></p>
+        </div>
     </div>
 
     <script>
@@ -94,16 +126,31 @@
         }
 
         // Function to remove a book from the cart
+
+
         function removeFromCart(bookId, title) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart = cart.filter(id => id !== bookId);
             localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`"${title}" has been removed from your cart.`);
+
+            // Show the custom popup
+            const popup = document.getElementById('removePopup');
+            const popupMessage = document.getElementById('remove-popup-message');
+            popupMessage.textContent = `"${title}" has been removed from your cart.`;
+
+            // Show the popup
+            popup.style.display = 'flex';
+
+            // Close the popup after 3 seconds
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 3000);
 
             // Reload cart items
             loadCart();
             updateCartCount();
         }
+
 
         // Function to handle buying all items in the cart
         function buyAll() {
@@ -176,6 +223,6 @@
 
 
     <script src="script.js"></script>
-    </body>
+</body>
 
 </html>
