@@ -19,9 +19,9 @@ function createBookCard(book, container) {
     content.innerHTML = `
         <h3>${title}</h3>
         <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
-        <p>$99</p>
+        <p>Price: $99</p>
         <div class="buttons">
-            <button class="card-btn cart-btn" onclick="addToCart('${bookId}')">Add to cart</button>
+            <button class="card-btn cart-btn" onclick="addToCart('${bookId}','${title}')">Add to cart</button>
         </div>
     `;
 

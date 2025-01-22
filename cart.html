@@ -10,31 +10,7 @@
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <style>
-        .remove-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.743);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .remove-popup-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            width: 300px;
-            height: 200px
-        }
-    </style>
+ 
 
 </head>
 
@@ -59,8 +35,8 @@
         <button class="card-btn buy-all-btn" onclick="buyAll()">Buy All</button>
     </div>
 
-    <div id="removePopup" class="remove-popup">
-        <div class="remove-popup-content">
+    <div id="removePopup" class="popup">
+        <div class="popup-content">
             <p id="remove-popup-message"></p>
         </div>
     </div>
@@ -103,6 +79,7 @@
                             content.innerHTML = `
                             <h3>${title}</h3>
                               <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
+                               <p>Price: $99</p>
                               <div class="buttons">
                                            <button class="card-btn remove-btn" onclick="removeFromCart('${bookId}', '${title}')">Remove</button>
                                         <button class="card-btn buy-btn" onclick="BuyFromCart('${bookId}', '${title}')">Buy</button>
