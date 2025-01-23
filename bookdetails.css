@@ -1,174 +1,174 @@
 /* Book Details Section */
 section {
-    margin-top: 70px;  /* Push content down to avoid navbar overlap */
+  margin-top: 70px; /* Push content down to avoid navbar overlap */
 }
 
 #box {
-    display: flex;
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    gap: 30px;
+  display: flex;
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 30px;
 }
 
 /* Image Styling - 35% of parent */
 #imdiv {
-    flex: 0 0 35%;
-    display: flex;
-    flex-direction: column;  /* Stack the image and button vertically */
-    justify-content: flex-start;
-    align-items: center;
-    gap: 25px; /* Increased space between image and button */
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start;
+  align-items: center;
+  gap: 25px; 
 }
 
 #imdiv img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .details-card-btn {
-    width: 70%; /* Slightly increased button width for better alignment */
-    padding: 12px 20px;
+  width: 70%; 
+  padding: 12px 20px;
 }
 
 /* Book Details */
 #bookDetails {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 25px; /* Increased gap for better readability */
-    padding-left: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 25px; 
+  padding-left: 20px;
 }
 
 #bookTitle {
-    font-size: 28px;
-    font-weight: bold;
-    color: #000e29;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000e29;
 }
 
 #bookDescription {
-    font-size: 16px;
-    color: #000000;
-    line-height: 1.8;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.8;
 }
 
 /* Responsive Design */
 
 /* Large Screens (Desktops and Laptops) */
 @media (max-width: 1200px) {
-    #box {
-        max-width: 900px;
-        gap: 20px;
-        padding: 25px; /* Reduced padding for better space management */
-    }
+  #box {
+    max-width: 900px;
+    gap: 20px;
+    padding: 25px; 
+  }
 
-    #bookTitle {
-        font-size: 26px;
-    }
+  #bookTitle {
+    font-size: 26px;
+  }
 }
 
 /* Medium Screens (Tablets and small laptops) */
 @media (max-width: 800px) {
-    #box {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        gap: 25px;  /* Adjusted gap between sections */
-    }
+  #box {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 25px; 
+  }
 
-    #imdiv {
-        flex: 1;
-        max-width: 60%;
-    }
+  #imdiv {
+    flex: 1;
+    max-width: 60%;
+  }
 
-    #bookDetails {
-        text-align: center;
-        align-items: center;
-    }
+  #bookDetails {
+    text-align: center;
+    align-items: center;
+  }
 
-    .details-card-btn {
-        width: 100%;
-        padding: 15px 20px;  /* Increased padding for the button */
-    }
+  .details-card-btn {
+    width: 100%;
+    padding: 15px 20px; 
+  }
 
-    #bookTitle {
-        font-size: 24px;
-    }
+  #bookTitle {
+    font-size: 24px;
+  }
 
-    #bookDescription {
-        font-size: 15px;
-    }
+  #bookDescription {
+    font-size: 15px;
+  }
 }
 
 /* Small Screens (Mobile Phones) */
 @media (max-width: 600px) {
-    #box {
-        padding: 15px;
-        max-width: 100%;
-        flex-direction: column;
-        gap: 30px;  /* Increased gap to separate content more */
-    }
+  #box {
+    padding: 15px;
+    max-width: 100%;
+    flex-direction: column;
+    gap: 30px; 
+  }
 
-    #imdiv {
-        max-width: 90%;
-    }
+  #imdiv {
+    max-width: 90%;
+  }
 
-    #bookTitle {
-        font-size: 22px;
-    }
+  #bookTitle {
+    font-size: 22px;
+  }
 
-    #bookDescription {
-        font-size: 14px;
-    }
+  #bookDescription {
+    font-size: 14px;
+  }
 
-    .details-card-btn {
-        font-size: 16px;
-        padding: 12px 18px; /* Adjusted padding for consistency */
-    }
+  .details-card-btn {
+    font-size: 16px;
+    padding: 12px 18px; 
+  }
 
-    #SearchInput {
-        width: 150px;
-    }
+  #SearchInput {
+    width: 150px;
+  }
 
-    .navbtn {
-        font-size: 14px;
-        padding: 5px 10px;
-    }
+  .navbtn {
+    font-size: 14px;
+    padding: 5px 10px;
+  }
 }
 
 /* Extra Small Screens (Very small devices) */
 @media (max-width: 400px) {
-    #box {
-        padding: 10px;
-        gap: 20px; /* Reduced gap for very small screens */
-    }
+  #box {
+    padding: 10px;
+    gap: 20px; 
+  }
 
-    #bookTitle {
-        font-size: 20px;
-    }
+  #bookTitle {
+    font-size: 20px;
+  }
 
-    #bookDescription {
-        font-size: 12px;
-    }
+  #bookDescription {
+    font-size: 12px;
+  }
 
-    .details-card-btn {
-        font-size: 14px;
-        padding: 10px 14px; /* Reduced padding for smaller screens */
-    }
+  .details-card-btn {
+    font-size: 14px;
+    padding: 10px 14px; 
+  }
 
-    #SearchInput {
-        width: 120px;
-    }
+  #SearchInput {
+    width: 120px;
+  }
 
-    .navbtn {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
+  .navbtn {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }

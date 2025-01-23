@@ -77,14 +77,13 @@
                             const content = document.createElement('div');
                             content.classList.add('content');
                             content.innerHTML = `
-                            <h3>${title}</h3>
-                              <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
-                               <p>Price: $99</p>
-                              <div class="buttons">
-                                           <button class="card-btn remove-btn" onclick="removeFromCart('${bookId}', '${title}')">Remove</button>
-                                        <button class="card-btn buy-btn" onclick="BuyFromCart('${bookId}', '${title}')">Buy</button>
-                              
-                                             </div>
+                                <h3>${title}</h3>
+                                <p>Author: ${authors ? authors.join(', ') : 'Unknown'}</p>
+                                <p>Price: $99</p>
+                                <div class="buttons">
+                                    <button class="card-btn remove-btn" onclick="removeFromCart('${bookId}', '${title}')">Remove</button>
+                                    <button class="card-btn buy-btn" onclick="BuyFromCart('${bookId}', '${title}')">Buy</button>
+                                 </div>
     `;
 
                             // Append the image and content to the card
@@ -127,106 +126,57 @@
             updateCartCount();
         }
 
-
         // Function to handle buying all items in the cart
-        // function buyAll() {
-        //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        //     if (cart.length === 0) {
-        //         popupMessage.textContent = `Your cart is empty add books`;
+        function buyAll() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                popupMessage.textContent = `Your cart is empty, add books`;
 
-        //         // Show the popup
-        //         popup.style.display = 'flex';
+                // Show the popup
+                popup.style.display = 'flex';
 
-        //         // Close the popup after 3 seconds
-        //         setTimeout(function () {
-        //             popup.style.display = 'none';
-        //         }, 2000);
+                // Close the popup after 3 seconds
+                setTimeout(function () {
+                    popup.style.display = 'none';
+                }, 2000);
 
-        //         return;
-        //     }
+                return;
+            }
 
-        //     let bookNames = [];
-        //     let fetchPromises = cart.map(bookId =>
-        //         fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
-        //             .then(response => response.json())
-        //             .then(book => {
-        //                 if (book.volumeInfo && book.volumeInfo.title) {
-        //                     bookNames.push(book.volumeInfo.title);
-        //                 }
-        //             })
-        //     );
+            let bookNames = [];
+            let fetchPromises = cart.map(bookId =>
+                fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+                    .then(response => response.json())
+                    .then(book => {
+                        if (book.volumeInfo && book.volumeInfo.title) {
+                            bookNames.push(book.volumeInfo.title);
+                        }
+                    })
+            );
 
-        //     Promise.all(fetchPromises).then(() => {
-        //         const booksList = bookNames.join(", ");
-        //         popupMessage.textContent = `Purchase successful! Items purchased:\n${booksList}\nAddress: ${address}`;
+            Promise.all(fetchPromises).then(() => {
+                const booksList = bookNames.join(", ");
+                popupMessage.textContent = `Purchase successful!\n Items purchased:\n${booksList}`;
 
-        //         // Show the popup
-        //         popup.style.display = 'flex';
+                // Show the popup
+                popup.style.display = 'flex';
 
-        //         // Close the popup after 3 seconds
-        //         setTimeout(function () {
-        //             popup.style.display = 'none';
-        //         }, 2000);
+                // Close the popup after 3 seconds
+                setTimeout(function () {
+                    popup.style.display = 'none';
+                }, 2000);
 
-
-
-        //         localStorage.removeItem('cart');
-        //         loadCart();
-        //         updateCartCount();
-        //     });
-        // }
-
-// Function to handle buying all items in the cart
-function buyAll() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    if (cart.length === 0) {
-        popupMessage.textContent = `Your cart is empty, add books`;
-
-        // Show the popup
-        popup.style.display = 'flex';
-
-        // Close the popup after 3 seconds
-        setTimeout(function () {
-            popup.style.display = 'none';
-        }, 2000);
-
-        return;
-    }
-
-    let bookNames = [];
-    let fetchPromises = cart.map(bookId =>
-        fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
-            .then(response => response.json())
-            .then(book => {
-                if (book.volumeInfo && book.volumeInfo.title) {
-                    bookNames.push(book.volumeInfo.title);
-                }
-            })
-    );
-
-    Promise.all(fetchPromises).then(() => {
-        const booksList = bookNames.join(", ");
-        popupMessage.textContent = `Purchase successful! Items purchased:\n${booksList}`;
-
-        // Show the popup
-        popup.style.display = 'flex';
-
-        // Close the popup after 3 seconds
-        setTimeout(function () {
-            popup.style.display = 'none';
-        }, 2000);
-
-        // Clear cart after purchase
-        localStorage.removeItem('cart');
-        loadCart();
-        updateCartCount();
-    }).catch(err => {
-        console.error("Error during purchase:", err);
-        popupMessage.textContent = "There was an error processing your purchase.";
-        popup.style.display = 'flex';
-        setTimeout(() => popup.style.display = 'none', 2000);
-    });
-}
+                // Clear cart after purchase
+                localStorage.removeItem('cart');
+                loadCart();
+                updateCartCount();
+            }).catch(err => {
+                console.error("Error during purchase:", err);
+                popupMessage.textContent = "There was an error processing your purchase.";
+                popup.style.display = 'flex';
+                setTimeout(() => popup.style.display = 'none', 2000);
+            });
+        }
 
 
         // Function to handle buying an individual book
