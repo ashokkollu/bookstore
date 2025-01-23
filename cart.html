@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="cards.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
- 
+
 
 </head>
 
@@ -35,9 +35,9 @@
         <button class="card-btn buy-all-btn" onclick="buyAll()">Buy All</button>
     </div>
 
-    <div id="removePopup" class="popup">
+    <div id="CartPopup" class="popup">
         <div class="popup-content">
-            <p id="remove-popup-message"></p>
+            <p id="Cart-popup-message"></p>
         </div>
     </div>
 
@@ -104,15 +104,14 @@
 
         // Function to remove a book from the cart
 
-
+        const popup = document.getElementById('CartPopup');
+        const popupMessage = document.getElementById('Cart-popup-message');
         function removeFromCart(bookId, title) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart = cart.filter(id => id !== bookId);
             localStorage.setItem('cart', JSON.stringify(cart));
 
             // Show the custom popup
-            const popup = document.getElementById('removePopup');
-            const popupMessage = document.getElementById('remove-popup-message');
             popupMessage.textContent = `"${title}" has been removed from your cart.`;
 
             // Show the popup
@@ -121,7 +120,7 @@
             // Close the popup after 3 seconds
             setTimeout(function () {
                 popup.style.display = 'none';
-            }, 3000);
+            }, 2000);
 
             // Reload cart items
             loadCart();
@@ -130,52 +129,125 @@
 
 
         // Function to handle buying all items in the cart
-        function buyAll() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart.length === 0) {
-                alert("Your cart is empty. Add items to buy.");
-                return;
-            }
+        // function buyAll() {
+        //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        //     if (cart.length === 0) {
+        //         popupMessage.textContent = `Your cart is empty add books`;
 
-            let bookNames = [];
-            let fetchPromises = cart.map(bookId =>
-                fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
-                    .then(response => response.json())
-                    .then(book => {
-                        if (book.volumeInfo && book.volumeInfo.title) {
-                            bookNames.push(book.volumeInfo.title);
-                        }
-                    })
-            );
+        //         // Show the popup
+        //         popup.style.display = 'flex';
 
-            Promise.all(fetchPromises).then(() => {
-                const booksList = bookNames.join(", ");
-                const address = prompt(`Enter your address to purchase:\nBooks: ${booksList}`);
-                if (!address) {
-                    alert("Address is required to complete the purchase.");
-                    return;
+        //         // Close the popup after 3 seconds
+        //         setTimeout(function () {
+        //             popup.style.display = 'none';
+        //         }, 2000);
+
+        //         return;
+        //     }
+
+        //     let bookNames = [];
+        //     let fetchPromises = cart.map(bookId =>
+        //         fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+        //             .then(response => response.json())
+        //             .then(book => {
+        //                 if (book.volumeInfo && book.volumeInfo.title) {
+        //                     bookNames.push(book.volumeInfo.title);
+        //                 }
+        //             })
+        //     );
+
+        //     Promise.all(fetchPromises).then(() => {
+        //         const booksList = bookNames.join(", ");
+        //         popupMessage.textContent = `Purchase successful! Items purchased:\n${booksList}\nAddress: ${address}`;
+
+        //         // Show the popup
+        //         popup.style.display = 'flex';
+
+        //         // Close the popup after 3 seconds
+        //         setTimeout(function () {
+        //             popup.style.display = 'none';
+        //         }, 2000);
+
+
+
+        //         localStorage.removeItem('cart');
+        //         loadCart();
+        //         updateCartCount();
+        //     });
+        // }
+
+// Function to handle buying all items in the cart
+function buyAll() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cart.length === 0) {
+        popupMessage.textContent = `Your cart is empty, add books`;
+
+        // Show the popup
+        popup.style.display = 'flex';
+
+        // Close the popup after 3 seconds
+        setTimeout(function () {
+            popup.style.display = 'none';
+        }, 2000);
+
+        return;
+    }
+
+    let bookNames = [];
+    let fetchPromises = cart.map(bookId =>
+        fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`)
+            .then(response => response.json())
+            .then(book => {
+                if (book.volumeInfo && book.volumeInfo.title) {
+                    bookNames.push(book.volumeInfo.title);
                 }
+            })
+    );
 
-                alert(`Purchase successful! Items purchased:\n${booksList}\nAddress: ${address}`);
-                localStorage.removeItem('cart');
-                loadCart();
-                updateCartCount();
-            });
-        }
+    Promise.all(fetchPromises).then(() => {
+        const booksList = bookNames.join(", ");
+        popupMessage.textContent = `Purchase successful! Items purchased:\n${booksList}`;
+
+        // Show the popup
+        popup.style.display = 'flex';
+
+        // Close the popup after 3 seconds
+        setTimeout(function () {
+            popup.style.display = 'none';
+        }, 2000);
+
+        // Clear cart after purchase
+        localStorage.removeItem('cart');
+        loadCart();
+        updateCartCount();
+    }).catch(err => {
+        console.error("Error during purchase:", err);
+        popupMessage.textContent = "There was an error processing your purchase.";
+        popup.style.display = 'flex';
+        setTimeout(() => popup.style.display = 'none', 2000);
+    });
+}
+
 
         // Function to handle buying an individual book
         function BuyFromCart(bookId, title) {
-            const address = prompt(`Enter your address to purchase:\nBook: "${title}"`);
-            if (!address) {
-                alert("Address is required to complete the purchase.");
-                return;
-            }
+
 
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart = cart.filter(id => id !== bookId);
             localStorage.setItem('cart', JSON.stringify(cart));
 
-            alert(`Purchase successful for "${title}"\nAddress: ${address}`);
+            popupMessage.textContent = `Purchase successful for "${title}"`;
+
+            // Show the popup
+            popup.style.display = 'flex';
+
+            // Close the popup after 3 seconds
+            setTimeout(function () {
+                popup.style.display = 'none';
+            }, 2000);
+
+
             loadCart();
             updateCartCount();
         }
