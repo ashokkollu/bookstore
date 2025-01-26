@@ -60,7 +60,7 @@
             .then(book => {
                 if (book.volumeInfo) {
                     const { title, subtitle, description, authors, publisher, imageLinks, pageCount, categories } = book.volumeInfo;
-                    const thumbnail = imageLinks?.thumbnail || 'https://via.placeholder.com/150'; // Fallback image
+                    const thumbnail = imageLinks?.thumbnail || "images/cover.jpeg"; // Fallback image
 
                     document.getElementById('bookTitle').innerText = title;
 
