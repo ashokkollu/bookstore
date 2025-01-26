@@ -1,7 +1,7 @@
 /* General Card Container Styling */
 .card-container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Default: 6 cards per row */
+    grid-template-columns: repeat(6, 1fr); 
     gap: 20px;
     justify-content: center;
     padding: 20px;
@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Ensure cards take full width of their grid cell */
+    width: 100%; 
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -31,10 +31,10 @@
 .card img {
     width: 100%;
     height: auto;
-    max-height: 240px; /* Adjust this size as needed */
-    object-fit: contain; /* Ensure the full image is visible */
+    max-height: 240px; 
+    object-fit: contain; 
     background-color: #ECF0F1;
-    cursor: pointer; /* Indicate the card is clickable */
+    cursor: pointer; 
 }
 
 /* Card Content */
@@ -57,13 +57,13 @@
     margin-bottom: 12px;
 }
 
-/* Button Container */
+
 /* Button Container */
 .card .buttons {
-    display: flex; /* Ensures buttons are aligned side by side */
-    gap: 8px; /* Adds space between buttons */
-    justify-content: center; /* Centers the buttons horizontally */
-    align-items: center; /* Aligns the buttons vertically */
+    display: flex; 
+    gap: 8px; 
+    justify-content: center; 
+    align-items: center; 
     margin-bottom: 12px;
 }
 

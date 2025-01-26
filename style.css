@@ -8,6 +8,7 @@
 body {
   font-family: "Arial", sans-serif;
   background-color: #f4f4f4;
+  height: 100%;
 
   margin-top: 60px; /* Offset for fixed navbar */
 }
@@ -101,7 +102,7 @@ button:active {
   transform: scale(1);
 }
 
-/* Responsive Design for Navbar (Keep elements in row, adjust input size) */
+
 @media (max-width: 768px) {
   #search-container {
     justify-content: flex-start; 
@@ -165,4 +166,18 @@ button:active {
   text-align: center;
   width: 300px;
   height: 200px;
+}
+
+
+footer {
+  margin-top: auto; 
+  background:  #77466f;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
 }

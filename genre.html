@@ -32,6 +32,9 @@
             <p id="popup-message"></p>
         </div>
     </div>
+
+   
+
     <script>
 
         function loadBooksForGenre() {
@@ -41,7 +44,7 @@
             // Check if the genre parameter exists in the URL
             if (!genre || genre.trim() === "") {
                 console.log("Genre parameter is missing or empty in the URL");
-                return;  // Exit the function if there's no valid genre
+                return;  
             }
 
             const Url = `https://www.googleapis.com/books/v1/volumes?q=subject:${encodeURIComponent(genre)}&maxResults=40&key=AIzaSyD29r0ecLNh9PSSdPOZfvTvqEq0KysuiBo`;
