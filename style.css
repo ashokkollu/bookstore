@@ -181,3 +181,16 @@ footer p {
   margin: 0;
   font-size: 1rem;
 }
+
+footer div{
+  padding: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  
+}
+
+footer a{
+  color: white;
+  text-decoration: none;
+}
